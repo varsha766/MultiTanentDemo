@@ -27,9 +27,10 @@ app.post("/tenant", async (req, res) => {
 });
 
 //adding data of user to particular tenant DB
-app.post("/tenant/user", async (req, res) => {
+app.post("/tenant/:tenantId/user", async (req, res) => {
   try {
-    const { tenantId, name, email } = req.body;
+    const { tenantId } = req.params;
+    const { name, email } = req.body;
     const tenatModel = await getTenantModel();
     let tenantDetail = await tenatModel.findOne({ _id: tenantId });
     const appName = tenantDetail.appName;

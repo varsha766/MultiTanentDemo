@@ -1,9 +1,9 @@
 const { connectToDatabase } = require("./db-connection");
 const { tenantSchema } = require("../models/tenant");
-const { adminUrl } = require("../config");
+const { adminDBUrl } = require("../config");
 let db;
 const getDb = async () => {
-  db = db ? db : await connectToDatabase(adminUrl);
+  db = db ? db : await connectToDatabase(adminDBUrl);
   return db;
 };
 const getTenantModel = async () => {
