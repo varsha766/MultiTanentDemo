@@ -13,9 +13,9 @@ There are several approaches to implementing multi-tenancy
 
 I have used the Separate Database approach for implementing multi-tenancy. The app (and db) is divided into 2 categories: Tenant and Tenant users(the API routes are segregated as /tenant and /tenant/:tenantId/user).
 
-**Tenant** is used to managing tenant creation, storing and fetching tenant db connection information, etc.
+**Tenant** is responsible for managing tenant creation, storing retrieving tenant database connection information, and other related tasks..
 
-**Tenant users** are used to creating, and storing user detail of particular tenants.
+**Tenant users** are responsible for creating and storing user details for their respective tenants.
 
 Following are the main components used
 
