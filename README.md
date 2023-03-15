@@ -1,21 +1,19 @@
 # Multi-tenant App with Node.js and mongoDb
 
-Traditionally, software application were developed and deployed on dedicated hardware or servers, which meant that each customer required their own server, database, and resource. This approach was expensive and time-consuming to scale and maintain, especially for smaller organization or businesses.
-The concept of multi-tenancy emerged as a way to address this challenge.
+Traditionally, software applications were developed and deployed on dedicated hardware or servers, which meant that each customer required their own server, database, and resource. This approach was expensive and time-consuming to scale and maintain, especially for smaller organizations or businesses. The concept of multi-tenancy emerged as a way to address this challenge.
 
 Multi-tenancy is a software architecture in which a single instance of software serves multiple customer, each customer is called **tenant**.They shares the same resource but data is isolated and kept seprate from other tenants.
 ![multi-tenant app](https://user-images.githubusercontent.com/91577031/225214500-ef2823c9-5d77-41c4-adac-7020406df2b5.png)
 
-There are several approach to implement multi-tenancy
+There are several approaches to implementing multi-tenancy
 
-- Shared Database:- In this approach, all tenants share a single database or schema, with each tenant's data is seprated by a "tenantId" column or field.This approach uses RLS(Row-level-security).
-- Seprate Database:- Each tenant has their own seprate database or schema, with no data sharing between tenants. This approach provides strong data isolation and security.
-- Hybrid approach:- This approach combines element of both shared and separate infrastructure for each tenant.
+- Shared Database:- In this approach, all tenants share a single database or schema, with each tenant's data separated by a "tenantId" column or field. This approach uses RLS(Row-level-security).
+- Separate Database:- Each tenant has their own separate database or schema, with no data sharing between tenants. This approach provides strong data isolation and security.
+- Hybrid approach:- This approach combines elements of both shared and separate infrastructure for each tenant.
 
-I have used Seprate Database approach for implementing multi-tenancy.
-The app (and db) is divided into 2 categories: Tenant and Tenant users(the api routes are segregated as /tenant and /tenant/:tenantId/user).
-**Tenant** is used to manage tenant creation, storing and fetching tenant db connection information, etc.
-**Tenant users** is used to create, store user detail of particular tenant.
+I have used the Seprate Database approach for implementing multi-tenancy. The app (and db) is divided into 2 categories: Tenant and Tenant users(the API routes are segregated as /tenant and /tenant/:tenantId/user).
+**Tenant** is used to managing tenant creation, storing and fetching tenant db connection information, etc.
+**Tenant users** are used to creating, and storing user detail of particular tenants.
 
 Following are the main components used
 
@@ -132,4 +130,5 @@ app.post("/tenant/:tenantId/user", async (req, res) => {
   }
 });
 ```
+
 You can try out the code [here](https://github.com/varsha766/MultiTanentDemo).
