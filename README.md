@@ -1,6 +1,4 @@
-# MultiTanentDemo
-
-## Introduction
+# Multi-tenant App with Node.js and mongoDb
 
 Traditionally, software application were developed and deployed on dedicated hardware or servers, which meant that each customer required their own server, database, and resource. This approach was expensive and time-consuming to scale and maintain, especially for smaller organization or businesses.
 The concept of multi-tenancy emerged as a way to address this challenge.
