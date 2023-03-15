@@ -201,6 +201,10 @@ The `{useCache: true}` option passed to the `useDb` method ensures that the data
 You can try out the code [here](https://github.com/varsha766/MultiTanentDemo).
 
 ## References
-- https://www.ibm.com/topics/multi-tenant
-- https://www.youtube.com/watch?v=joz0DoSQDNw
-- https://medium.com/geekculture/building-a-multi-tenant-app-with-nodejs-mongodb-ec9b5be6e737
+https://www.ibm.com/topics/multi-tenant
+
+ https://www.youtube.com/watch?v=joz0DoSQDNw
+ 
+ https://medium.com/geekculture/building-a-multi-tenant-app-with-nodejs-mongodb-ec9b5be6e737
+ 
+https://medium.com/brightlab-techblog/multitenant-node-js-application-with-mongoose-mongodb-f8841a285b4f
