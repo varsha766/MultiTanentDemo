@@ -134,4 +134,4 @@ app.post("/tenant/:tenantId/user", async (req, res) => {
   }
 });
 ```
-You can try out the code from [Github repo](https://github.com/varsha766/MultiTanentDemo)
+You can try out the code [here](https://github.com/varsha766/MultiTanentDemo)
