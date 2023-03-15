@@ -12,7 +12,9 @@ There are several approaches to implementing multi-tenancy
 - Hybrid approach:- This approach combines elements of both shared and separate infrastructure for each tenant.
 
 I have used the Seprate Database approach for implementing multi-tenancy. The app (and db) is divided into 2 categories: Tenant and Tenant users(the API routes are segregated as /tenant and /tenant/:tenantId/user).
+
 **Tenant** is used to managing tenant creation, storing and fetching tenant db connection information, etc.
+
 **Tenant users** are used to creating, and storing user detail of particular tenants.
 
 Following are the main components used
