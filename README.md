@@ -33,8 +33,7 @@ socketTimeoutMS: 30000,
 //creating connection object
 const connectToDatabase = (dbUrl) => {
 return new Promise(async (resolve, reject) => {
-  const connection = await mongooseCreate connection to tenant Db whose users details to be stored or fetched
-
+  const connection = await mongoose
     .createConnection(dbUrl, mongoOptions)
     .asPromise();
   resolve(connection);
