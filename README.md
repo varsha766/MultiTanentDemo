@@ -2,7 +2,7 @@
 
 Traditionally, software applications were developed and deployed on dedicated hardware or servers, which meant that each customer required their own server, database, and resource. This approach was expensive and time-consuming to scale and maintain, especially for smaller organizations or businesses. The concept of multi-tenancy emerged as a way to address this challenge.
 
-Multi-tenancy is a software architecture in which a single instance of software serves multiple customer, each customer is called **tenant**.They shares the same resource but data is isolated and kept seprate from other tenants.
+Multi-tenancy is a software architecture in which a single instance of software serves multiple customer, each customer is called **tenant**.They shares the same resource but data is isolated and kept separate from other tenants.
 ![multi-tenant app](https://user-images.githubusercontent.com/91577031/225214500-ef2823c9-5d77-41c4-adac-7020406df2b5.png)
 
 There are several approaches to implementing multi-tenancy
@@ -11,7 +11,7 @@ There are several approaches to implementing multi-tenancy
 - Separate Database:- Each tenant has their own separate database or schema, with no data sharing between tenants. This approach provides strong data isolation and security.
 - Hybrid approach:- This approach combines elements of both shared and separate infrastructure for each tenant.
 
-I have used the Seprate Database approach for implementing multi-tenancy. The app (and db) is divided into 2 categories: Tenant and Tenant users(the API routes are segregated as /tenant and /tenant/:tenantId/user).
+I have used the Separate Database approach for implementing multi-tenancy. The app (and db) is divided into 2 categories: Tenant and Tenant users(the API routes are segregated as /tenant and /tenant/:tenantId/user).
 
 **Tenant** is used to managing tenant creation, storing and fetching tenant db connection information, etc.
 
