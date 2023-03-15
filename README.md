@@ -19,7 +19,70 @@ I have used the Separate Database approach for implementing multi-tenancy. The a
 
 Following are the main components used
 
-- `Create connection Object`: Create connection object based on the dbUrl passed.
+- `Schema for user and tenant`: Define `tenant.js` and `user.js` in a model folder.Tenant will represent the customer that use the application. Each tenant will have a database where userSchema used to store user information.
+```js
+// tenant.js
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const tenantSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    appName: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamp: true,
+  }
+);
+
+const Tenant = mongoose.model("tenant", tenantSchema);
+module.exports = { Tenant, tenantSchema };
+
+```
+
+```js
+//user.js
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const UserSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    tenantId: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamp: true,
+  }
+);
+
+const User = mongoose.model("user", UserSchema);
+module.exports = { User, UserSchema };
+
+```
+
+- `Create connection Object`: In a multi-tenant approach, it's necessary to establish multiple database connections. One connection is required for the adminDb, and a separate connection is required for each tenant's database. To create these connections, we can pass the corresponding database URLs to a function that creates and returns the connection objects. **connectToDatabase()** function creates a new database connection object.
 
 ```js
 const mongoose = require("mongoose");
@@ -43,6 +106,7 @@ module.exports = {
 connectToDatabase,
 };
 ```
+**mongoOptions** are used to configure the MongoDB driver's behavior when connecting MongoDB databse.
 
 - `Creating connection to adminDb`: Create a connection to the admin database to store tenant information in the `tenant` table.
 
@@ -64,6 +128,7 @@ module.exports = {
   getTenantModel,
 };
 ```
+**getDb()** function call connectToDatabase() with adminDBUrl to establish connection with adminDb. **getTenantModel()** allow us to get the registered model for our db.
 
 - `Creating connection to tenantDB`: Create a connection to the tenant database in order to store or fetch user details.
 
@@ -88,9 +153,9 @@ const getUserModel = async (tenantId) => {
 
 module.exports = { getUserModel };
 ```
-
-- `Admin app api`: Api to create new tenant
-
+**getUserModel()** function  used to retrieve `User` model for specific tenant. **getTenantDB()** function generate database name with tenantId and return the connection   if already exists.Otherwise esablishes a new connection with `tenantUrl` using `useDb`.
+The `{useCache: true}` option passed to the `useDb` method ensures that the database connection is cached for future use.
+- `Admin app api`: Sample apis for creating new tenants.
 ```js
 app.post("/tenant", async (req, res) => {
   try {
@@ -109,7 +174,7 @@ app.post("/tenant", async (req, res) => {
 });
 ```
 
-- `Tenant user api`: Api to create new user in particular tenant
+- `Tenant user api`: Sample apis for creating new users for particular tenant.
 
 ```js
 app.post("/tenant/:tenantId/user", async (req, res) => {
